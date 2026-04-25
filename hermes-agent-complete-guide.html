@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Agent - Complete Guide (Basic to Power User)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --bg-hover: #21262d;
+            --border: #30363d;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+            --accent-purple: #a371f7;
+            --code-bg: #0d1117;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .sidebar h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        
+        .sidebar nav a {
+            display: block;
+            padding: 8px 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 2px;
+            transition: all 0.2s;
+        }
+        
+        .sidebar nav a:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+        
+        .sidebar nav a.active {
+            background: var(--accent);
+            color: #fff;
+        }
+        
+        .sidebar nav a.section-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        /* Main Content */
+        .main {
+            margin-left: 300px;
+            padding: 40px;
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            font-size: 32px;
+            margin: 50px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        h3 {
+            font-size: 24px;
+            margin: 30px 0 15px;
+            color: var(--accent);
+        }
+        
+        h4 {
+            font-size: 18px;
+            margin: 20px 0 10px;
+            color: var(--text-primary);
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 25px;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        /* Code Blocks */
+        code {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--accent-orange);
+        }
+        
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* Command Input */
+        .command {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .command .prompt {
+            color: var(--accent-green);
+            margin-right: 10px;
+            font-weight: 600;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .card h4 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+        
+        /* Tips */
+        .tip {
+            background: rgba(63, 185, 80, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tip-title {
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 5px;
+        }
+        
+        .warning {
+            background: rgba(210, 153, 34, 0.1);
+            border-left: 4px solid var(--accent-orange);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-title {
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-bottom: 5px;
+        }
+        
+        .danger {
+            background: rgba(248, 81, 73, 0.1);
+            border-left: 4px solid var(--accent-red);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .danger-title {
+            font-weight: 600;
+            color: var(--accent-red);
+            margin-bottom: 5px;
+        }
+        
+        /* Sections */
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            background: var(--bg-hover);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        td {
+            color: var(--text-secondary);
+        }
+        
+        tr:hover td {
+            background: var(--bg-hover);
+        }
+        
+        /* Anchor Links */
+        .anchor-link {
+            color: var(--accent);
+            text-decoration: none;
+            margin-left: 10px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        h2:hover .anchor-link,
+        h3:hover .anchor-link,
+        h4:hover .anchor-link {
+            opacity: 1;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .sidebar {
+                display: none;
+            }
+            .main {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <nav>
+            <a href="#intro">Introduction</a>
+            <a href="#getting-started" class="section-title">1. Getting Started</a>
+            <a href="#installation">Installation</a>
+            <a href="#initial-setup">Initial Setup</a>
+            <a href="#first-run">First Run</a>
+            
+            <a href="#core-workflow" class="section-title">2. Core Workflow</a>
+            <a href="#interactive-chat">Interactive Chat</a>
+            <a href="#single-query">Single Query</a>
+            <a href="#session-management">Session Management</a>
+            
+            <a href="#slash-commands" class="section-title">3. Slash Commands</a>
+            <a href="#session-commands">Session Commands</a>
+            <a href="#context-commands">Context Commands</a>
+            <a href="#tool-commands">Tool Commands</a>
+            <a href="#messaging-commands">Messaging Commands</a>
+            
+            <a href="#tools-extensions" class="section-title">4. Tools & Extensions</a>
+            <a href="#mcp-servers">MCP Servers</a>
+            <a href="#skills-system">Skills System</a>
+            <a href="#plugins">Plugins</a>
+            
+            <a href="#automation" class="section-title">5. Automation</a>
+            <a href="#cron-jobs">Cron Jobs</a>
+            <a href="#background-tasks">Background Tasks</a>
+            <a href="#queue-system">Queue System</a>
+            
+            <a href="#messaging" class="section-title">6. Messaging Platforms</a>
+            <a href="#telegram-setup">Telegram</a>
+            <a href="#discord-setup">Discord</a>
+            <a href="#slack-setup">Slack</a>
+            <a href="#whatsapp-setup">WhatsApp</a>
+            <a href="#gateway">Gateway</a>
+            
+            <a href="#memory" class="section-title">7. Memory System</a>
+            <a href="#session-memory">Session Memory</a>
+            <a href="#long-term-memory">Long-term Memory</a>
+            <a href="#user-profile">User Profile</a>
+            
+            <a href="#configuration" class="section-title">8. Configuration</a>
+            <a href="#config-yaml">config.yaml</a>
+            <a href="#env-variables">Environment Variables</a>
+            <a href="#model-setup">Model Setup</a>
+            
+            <a href="#power-tips" class="section-title">9. Power User Tips</a>
+            <a href="#context-optimization">Context Optimization</a>
+            <a href="#token-saving">Token Saving</a>
+            <a href="#efficient-workflows">Efficient Workflows</a>
+            
+            <a href="#troubleshooting" class="section-title">10. Troubleshooting</a>
+            <a href="#debug-reports">Debug Reports</a>
+            <a href="#health-checks">Health Checks</a>
+            
+            <a href="#quick-ref" class="section-title">Quick Reference</a>
+            <a href="#command-list">Command List</a>
+        </nav>
+    </div>
+    
+    <div class="main">
+        <h1>Hermes Agent</h1>
+        <p class="subtitle">Complete Guide: Basic to Power User</p>
+        
+        <!-- Introduction -->
+        <section id="intro">
+            <h2>Introduction <a class="anchor-link" href="#intro">#</a></h2>
+            <p>Hermes Agent is an open-source AI agent that runs on your server with persistent memory, multi-platform messaging integration (Telegram, Discord, Slack, WhatsApp), scheduled automations, and extensible tool-calling capabilities.</p>
+            
+            <div class="tip">
+                <div class="tip-title">What makes Hermes special?</div>
+                <ul>
+                    <li><strong>Persistent Memory:</strong> Learns and improves across sessions</li>
+                    <li><strong>Multi-platform:</strong> Works on CLI, Telegram, Discord, Slack, WhatsApp</li>
+                    <li><strong>Automation:</strong> Schedule recurring tasks with cron</li>
+                    <li><strong>Extensible:</strong> MCP servers, skills, plugins</li>
+                    <li><strong>Self-learning:</strong> Creates and refines skills over time</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Getting Started -->
+        <section id="getting-started">
+            <h2>1. Getting Started <a class="anchor-link" href="#getting-started">#</a></h2>
+            
+            <h3 id="installation">Installation <a class="anchor-link" href="#installation">#</a></h3>
+            <p>Install Hermes Agent using the official installation script:</p>
+            
+            <div class="command">
+                <span class="prompt">$</span>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+            </div>
+            
+            <p>This script will:</p>
+            <ul>
+                <li>Download and set up Hermes Agent</li>
+                <li>Create necessary directories (~/.hermes)</li>
+                <li>Set up configuration files</li>
+                <li>Add hermes command to PATH</li>
+            </ul>
+            
+            <div class="warning">
+                <div class="warning-title">Prerequisites</div>
+                <ul>
+                    <li>Python 3.10+ installed</li>
+                    <li>curl or wget</li>
+                    <li>API key for your LLM provider (OpenAI, Anthropic, Ollama, etc.)</li>
+                </ul>
+            </div>
+            
+            <h3 id="initial-setup">Initial Setup <a class="anchor-link" href="#initial-setup">#</a></h3>
+            <p>Run the interactive setup wizard to configure Hermes:</p>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes setup
+            </div>
+            
+            <p>The setup wizard will guide you through:</p>
+            <ol>
+                <li>Selecting your LLM provider (OpenAI, Anthropic, Ollama, etc.)</li>
+                <li>Entering API keys</li>
+                <li>Choosing a default model</li>
+                <li>Setting up messaging platforms (optional)</li>
+            </ol>
+            
+            <h3 id="first-run">First Run <a class="anchor-link" href="#first-run">#</a></h3>
+            <p>Start an interactive chat session:</p>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes
+            </div>
+            
+            <p>You should see a welcome message. Try typing:</p>
+            
+            <pre><code>Hello! What are your capabilities?</code></pre>
+            
+            <div class="tip">
+                <div class="tip-title">Health Check</div>
+                <p>Always verify your installation is working correctly:</p>
+                <div class="command">
+                    <span class="prompt">$</span>hermes doctor
+                </div>
+            </div>
+        </section>
+        
+        <!-- Core Workflow -->
+        <section id="core-workflow">
+            <h2>2. Core Workflow <a class="anchor-link" href="#core-workflow">#</a></h2>
+            
+            <h3 id="interactive-chat">Interactive Chat <a class="anchor-link" href="#interactive-chat">#</a></h3>
+            <p>The primary way to interact with Hermes - a continuous conversation:</p>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes
+            </div>
+            
+            <p>This starts an interactive session where:</p>
+            <ul>
+                <li>You type messages and Hermes responds</li>
+                <li>Conversation history is preserved</li>
+                <li>Hermes can use tools and skills</li>
+                <li>Memory persists across turns</li>
+            </ul>
+            
+            <h3 id="single-query">Single Query <a class="anchor-link" href="#single-query">#</a></h3>
+            <p>Run a one-shot query without interactive mode:</p>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes chat -q "What is the capital of France?"
+            </div>
+            
+            <p>Useful for:</p>
+            <ul>
+                <li>Scripting and automation</li>
+                <li>Quick questions</li>
+                <li>CI/CD pipelines</li>
+            </ul>
+            
+            <h3 id="session-management">Session Management <a class="anchor-link" href="#session-management">#</a></h3>
+            <p>Hermes automatically manages sessions. Key commands:</p>
+            
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>/new</code> or <code>/reset</code></td>
+                    <td>Start a fresh session</td>
+                </tr>
+                <tr>
+                    <td><code>/clear</code></td>
+                    <td>Clear screen and new session (CLI)</td>
+                </tr>
+                <tr>
+                    <td><code>/resume [name]</code></td>
+                    <td>Resume a previous session</td>
+                </tr>
+                <tr>
+                    <td><code>/history</code></td>
+                    <td>View conversation history</td>
+                </tr>
+                <tr>
+                    <td><code>/save</code></td>
+                    <td>Save conversation to disk</td>
+                </tr>
+                <tr>
+                    <td><code>/title [name]</code></td>
+                    <td>Name current session</td>
+                </tr>
+                <tr>
+                    <td><code>/exit</code> or <code>Ctrl+D</code></td>
+                    <td>End session</td>
+                </tr>
+            </table>
+        </section>
+        
+        <!-- Slash Commands -->
+        <section id="slash-commands">
+            <h2>3. Slash Commands <a class="anchor-link" href="#slash-commands">#</a></h2>
+            <p>Type <code>/</code> in chat to see available commands. Here's the complete reference:</p>
+            
+            <h3 id="session-commands">Session Commands <a class="anchor-link" href="#session-commands">#</a></h3>
+            <p>Manage conversation state:</p>
+            
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Usage</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>/new</code></td>
+                    <td><code>/new</code></td>
+                    <td>Start new session with fresh ID</td>
+                </tr>
+                <tr>
+                    <td><code>/reset</code></td>
+                    <td><code>/reset</code></td>
+                    <td>Alias for /new</td>
+                </tr>
+                <tr>
+                    <td><code>/clear</code></td>
+                    <td><code>/clear</code></td>
+                    <td>Clear screen, new session (CLI)</td>
+                </tr>
+                <tr>
+                    <td><code>/history</code></td>
+                    <td><code>/history</code></td>
+                    <td>Display conversation history</td>
+                </tr>
+                <tr>
+                    <td><code>/save</code></td>
+                    <td><code>/save</code></td>
+                    <td>Save conversation permanently</td>
+                </tr>
+                <tr>
+                    <td><code>/retry</code></td>
+                    <td><code>/retry</code></td>
+                    <td>Resend last message</td>
+                </tr>
+                <tr>
+                    <td><code>/undo</code></td>
+                    <td><code>/undo</code></td>
+                    <td>Remove last exchange</td>
+                </tr>
+                <tr>
+                    <td><code>/title</code></td>
+                    <td><code>/title My Session</code></td>
+                    <td>Set session name</td>
+                </tr>
+                <tr>
+                    <td><code>/resume</code></td>
+                    <td><code>/resume [name]</code></td>
+                    <td>Resume named session</td>
+                </tr>
+                <tr>
+                    <td><code>/branch</code></td>
+                    <td><code>/branch [name]</code></td>
+                    <td>Branch session for exploration</td>
+                </tr>
+                <tr>
+                    <td><code>/stop</code></td>
+                    <td><code>/stop</code></td>
+                    <td>Kill background processes</td>
+                </tr>
+            </table>
+            
+            <h3 id="context-commands">Context & Token Commands <a class="anchor-link" href="#context-commands">#</a></h3>
+            <p>Manage context and optimize performance:</p>
+            
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Usage</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>/compress</code></td>
+                    <td><code>/compress [focus]</code></td>
+                    <td>Summarize context, preserve focus</td>
+                </tr>
+                <tr>
+                    <td><code>/compact</code></td>
+                    <td><code>/compact [focus]</code></td>
+                    <td>Compress context (CLAUDE.md survives)</td>
+                </tr>
+                <tr>
+                    <td><code>/context</code></td>
+                    <td><code>/context</code></td>
+                    <td>Visualize context usage</td>
+                </tr>
+                <tr>
+                    <td><code>/usage</code></td>
+                    <td><code>/usage</code></td>
+                    <td>Check token consumption</td>
+                </tr>
+                <tr>
+                    <td><code>/cost</code></td>
+                    <td><code>/cost</code></td>
+                    <td>Token usage breakdown</td>
+                </tr>
+            </table>
+            
+            <h3 id="tool-commands">Tool Commands <a class="anchor-link" href="#tool-commands">#</a></h3>
+            <p>Manage tools, skills, and plugins:</p>
+            
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Usage</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>/help</code></td>
+                    <td><code>/help</code></td>
+                    <td>Show all commands</td>
+                </tr>
+                <tr>
+                    <td><code>/tools</code></td>
+                    <td><code>/tools</code></td>
+                    <td>List available tools</td>
+                </tr>
+                <tr>
+                    <td><code>/toolsets</code></td>
+                    <td><code>/toolsets</code></td>
+                    <td>List tool collections</td>
+                </tr>
+                <tr>
+                    <td><code>/skills</code></td>
+                    <td><code>/skills</code></td>
+                    <td>Browse/search skills</td>
+                </tr>
+                <tr>
+                    <td><code>/skill</code></td>
+                    <td><code>/skill &lt;name&gt;</code></td>
+                    <td>Load specific skill</td>
+                </tr>
+                <tr>
+                    <td><code>/plugins</code></td>
+                    <td><code>/plugins</code></td>
+                    <td>List plugins</td>
+                </tr>
+                <tr>
+                    <td><code>/cron</code></td>
+                    <td><code>/cron</code></td>
+                    <td>Manage cron jobs</td>
+                </tr>
+                <tr>
+                    <td><code>/reload-mcp</code></td>
+                    <td><code>/reload-mcp</code></td>
+                    <td>Reload MCP servers</td>
+                </tr>
+            </table>
+            
+            <h3 id="messaging-commands">Messaging & Convenience Commands <a class="anchor-link" href="#messaging-commands">#</a></h3>
+            
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>Usage</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>/model</code></td>
+                    <td><code>/model</code></td>
+                    <td>Switch model/provider</td>
+                </tr>
+                <tr>
+                    <td><code>/personality</code></td>
+                    <td><code>/personality pirate</code></td>
+                    <td>Change personality</td>
+                </tr>
+                <tr>
+                    <td><code>/btw</code></td>
+                    <td><code>/btw &lt;question&gt;</code></td>
+                    <td>Side question (no context cost)</td>
+                </tr>
+                <tr>
+                    <td><code>/background</code></td>
+                    <td><code>/background &lt;prompt&gt;</code></td>
+                    <td>Run in background session</td>
+                </tr>
+                <tr>
+                    <td><code>/queue</code></td>
+                    <td><code>/queue &lt;prompt&gt;</code></td>
+                    <td>Queue for next turn</td>
+                </tr>
+                <tr>
+                    <td><code>/status</code></td>
+                    <td><code>/status</code></td>
+                    <td>Session info</td>
+                </tr>
+                <tr>
+                    <td><code>/todos</code></td>
+                    <td><code>/todos</code></td>
+                    <td>List action items</td>
+                </tr>
+                <tr>
+                    <td><code>/rewind</code></td>
+                    <td><code>/rewind</code></td>
+                    <td>Revert to checkpoint</td>
+                </tr>
+                <tr>
+                    <td><code>/rollback</code></td>
+                    <td><code>/rollback [N]</code></td>
+                    <td>Restore filesystem</td>
+                </tr>
+                <tr>
+                    <td><code>/snapshot</code></td>
+                    <td><code>/snapshot [create|restore|prune]</code></td>
+                    <td>State snapshots</td>
+                </tr>
+                <tr>
+                    <td><code>/debug</code></td>
+                    <td><code>/debug</code></td>
+                    <td>Upload debug report</td>
+                </tr>
+                <tr>
+                    <td><code>/profile</code></td>
+                    <td><code>/profile</code></td>
+                    <td>Show profile info</td>
+                </tr>
+                <tr>
+                    <td><code>/plan</code></td>
+                    <td><code>/plan [request]</code></td>
+                    <td>Load plan skill</td>
+                </tr>
+            </table>
+            
+            <div class="tip">
+                <div class="tip-title">Quick Tip: /btw Command</div>
+                <p>Use <code>/btw</code> for quick questions without adding to conversation history:</p>
+                <pre><code>/btw what was the user's name?</code></pre>
+                <p>This is perfect for clarifications that don't need to be remembered.</p>
+            </div>
+        </section>
+        
+        <!-- Tools & Extensions -->
+        <section id="tools-extensions">
+            <h2>4. Tools & Extensions <a class="anchor-link" href="#tools-extensions">#</a></h2>
+            
+            <h3 id="mcp-servers">MCP Servers <a class="anchor-link" href="#mcp-servers">#</a></h3>
+            <p>MCP (Model Context Protocol) servers add external tools to Hermes. Configure in <code>~/.hermes/config.yaml</code>:</p>
+            
+            <h4>Basic MCP Setup</h4>
+            <pre><code>mcp_servers:
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "ghp_xxx"</code></pre>
+            
+            <h4>Full Configuration Example</h4>
+            <pre><code>mcp_servers:
+  # GitHub with tool filtering
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "ghp_xxx"
+    tools:
+      include: [create_issue, list_issues, search_code]
+      prompts: false
+  
+  # Stripe via HTTP
+  stripe:
+    url: "https://mcp.stripe.com"
+    headers:
+      Authorization: "Bearer xxx"
+    tools:
+      exclude: [delete_customer]
+      resources: false
+  
+  # Custom disabled server
+  legacy:
+    url: "https://mcp.legacy.internal"
+    enabled: false</code></pre>
+            
+            <h4>MCP Configuration Options</h4>
+            <table>
+                <tr>
+                    <th>Option</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>command</code></td>
+                    <td>string</td>
+                    <td>Command to run (stdio transport)</td>
+                </tr>
+                <tr>
+                    <td><code>args</code></td>
+                    <td>array</td>
+                    <td>Command arguments</td>
+                </tr>
+                <tr>
+                    <td><code>url</code></td>
+                    <td>string</td>
+                    <td>HTTP endpoint (HTTP transport)</td>
+                </tr>
+                <tr>
+                    <td><code>headers</code></td>
+                    <td>object</td>
+                    <td>HTTP headers</td>
+                </tr>
+                <tr>
+                    <td><code>auth</code></td>
+                    <td>string</td>
+                    <td>"oauth" for OAuth 2.1</td>
+                </tr>
+                <tr>
+                    <td><code>enabled</code></td>
+                    <td>boolean</td>
+                    <td>Enable/disable server</td>
+                </tr>
+                <tr>
+                    <td><code>timeout</code></td>
+                    <td>int</td>
+                    <td>Tool call timeout (seconds)</td>
+                </tr>
+                <tr>
+                    <td><code>tools.include</code></td>
+                    <td>array</td>
+                    <td>Allowed tools</td>
+                </tr>
+                <tr>
+                    <td><code>tools.exclude</code></td>
+                    <td>array</td>
+                    <td>Blocked tools</td>
+                </tr>
+            </table>
+            
+            <h3 id="skills-system">Skills System <a class="anchor-link" href="#skills-system">#</a></h3>
+            <p>Skills extend Hermes with specialized capabilities. Browse and install:</p>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes skills browse
+            </div>
+            
+            <p>Search for skills:</p>
+            <div class="command">
+                <span class="prompt">$</span>hermes skills search kubernetes --source skills-sh
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes skills search https://mintlify.com/docs --source well-known
+            </div>
+            
+            <p>Install skills:</p>
+            <div class="command">
+                <span class="prompt">$</span>hermes skills install openai/skills/k8s
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes skills install official/security/1password
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes skills install skills-sh/vercel-labs/json-render --force
+            </div>
+            
+            <p>Use skills as commands:</p>
+            <div class="command">
+                <span class="prompt">$</span>hermes
+            </div>
+            <pre><code>/gif-search funny cats
+/github-pr-workflow create a PR for the auth refactor
+/excalidraw</code></pre>
+            
+            <h3 id="plugins">Plugins <a class="anchor-link" href="#plugins">#</a></h3>
+            <p>List available plugins:</p>
+            <div class="command">
+                <span class="prompt">$</span>hermes plugins
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes mcp list
+            </div>
+        </section>
+        
+        <!-- Automation -->
+        <section id="automation">
+            <h2>5. Automation <a class="anchor-link" href="#automation">#</a></h2>
+            
+            <h3 id="cron-jobs">Cron Jobs <a class="anchor-link" href="#cron-jobs">#</a></h3>
+            <p>Schedule recurring tasks to run automatically:</p>
+            
+            <h4>Using /cron in Chat</h4>
+            <pre><code>/cron add 30m "Remind me to check the build"
+/cron add "every 2h" "Check server status"
+/cron add "every 1h" "Summarize new feed items" --skill blogwatcher</code></pre>
+            
+            <h4>Using CLI</h4>
+            <div class="command">
+                <span class="prompt">$</span>hermes cron create "0 9 * * 1" \
+  "Generate a weekly AI news digest" \
+  --name "Weekly digest" \
+  --deliver telegram
+            </div>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes cron create "every 1h" "Use both skills" \
+  --skill blogwatcher \
+  --skill find-nearby \
+  --name "Skill combo"
+            </div>
+            
+            <h4>List Cron Jobs</h4>
+            <div class="command">
+                <span class="prompt">$</span>hermes cron list
+            </div>
+            
+            <h4>Cron Schedule Formats</h4>
+            <table>
+                <tr>
+                    <th>Format</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Standard cron</td>
+                    <td><code>0 9 * * *</code> = 9am daily</td>
+                </tr>
+                <tr>
+                    <td>Relative</td>
+                    <td><code>every 2h</code> = every 2 hours</td>
+                </tr>
+                <tr>
+                    <td>Minutes</td>
+                    <td><code>30m</code> = 30 minutes</td>
+                </tr>
+            </table>
+            
+            <h3 id="background-tasks">Background Tasks <a class="anchor-link" href="#background-tasks">#</a></h3>
+            <p>Run tasks without blocking:</p>
+            
+            <pre><code>/background research the latest news on autonomous agents</code></pre>
+            
+            <p>Results delivered back when complete. Your session stays free for other work.</p>
+            
+            <h3 id="queue-system">Queue System <a class="anchor-link" href="#queue-system">#</a></h3>
+            <p>Queue prompts for next turn:</p>
+            
+            <pre><code>/queue Write a summary of our conversation so far</code></pre>
+            
+            <div class="warning">
+                <div class="warning-title">Use /queue, not /q</div>
+                <p>Use <code>/queue</code> explicitly. Using <code>/q</code> can conflict with <code>/quit</code>.</p>
+            </div>
+        </section>
+        
+        <!-- Messaging Platforms -->
+        <section id="messaging">
+            <h2>6. Messaging Platforms <a class="anchor-link" href="#messaging">#</a></h2>
+            <p>Connect Hermes to Telegram, Discord, Slack, WhatsApp, and more:</p>
+            
+            <h3 id="telegram-setup">Telegram <a class="anchor-link" href="#telegram-setup">#</a></h3>
+            <ol>
+                <li>Message @BotFather on Telegram</li>
+                <li>Create a new bot with /newbot</li>
+                <li>Get the bot token</li>
+                <li>Add to ~/.hermes/.env:</li>
+            </ol>
+            <pre><code>TELEGRAM_ENABLED=true
+TELEGRAM_BOT_TOKEN=your_bot_token</code></pre>
+            
+            <h3 id="discord-setup">Discord <a class="anchor-link" href="#discord-setup">#</a></h3>
+            <ol>
+                <li>Go to Discord Developer Portal</li>
+                <li>Create an application and bot</li>
+                <li>Get the bot token</li>
+                <li>Add to ~/.hermes/.env:</li>
+            </ol>
+            <pre><code>DISCORD_ENABLED=true
+DISCORD_BOT_TOKEN=your_bot_token</code></pre>
+            
+            <h3 id="slack-setup">Slack <a class="anchor-link" href="#slack-setup">#</a></h3>
+            <ol>
+                <li>Create a Slack app at api.slack.com</li>
+                <li>Enable Bot Token Scope</li>
+                <li>Install to workspace</li>
+                <li>Add to ~/.hermes/.env:</li>
+            </ol>
+            <pre><code>SLACK_ENABLED=true
+SLACK_BOT_TOKEN=xoxb-your-token
+SLACK_SIGNING_SECRET=your_secret</code></pre>
+            
+            <h3 id="whatsapp-setup">WhatsApp <a class="anchor-link" href="#whatsapp-setup">#</a></h3>
+            <pre><code># Required
+WHATSAPP_ENABLED=true
+WHATSAPP_MODE=bot  # or "self-chat"
+
+# Access control — pick ONE:
+WHATSAPP_ALLOWED_USERS=15551234567,15559876543
+# WHATSAPP_ALLOWED_USERS=*
+# WHATSAPP_ALLOW_ALL_USERS=true</code></pre>
+            
+            <h3 id="gateway">Gateway <a class="anchor-link" href="#gateway">#</a></h3>
+            <p>The gateway manages all messaging platforms:</p>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes gateway setup
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes gateway start
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes gateway stop
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes gateway status
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes gateway install  # System service
+            </div>
+        </section>
+        
+        <!-- Memory System -->
+        <section id="memory">
+            <h2>7. Memory System <a class="anchor-link" href="#memory">#</a></h2>
+            
+            <h3 id="session-memory">Session Memory <a class="anchor-link" href="#session-memory">#</a></h3>
+            <p>Hermes automatically remembers conversation context within a session:</p>
+            <ul>
+                <li>Messages are preserved in context</li>
+                <li>Use <code>/compress</code> to summarize and save tokens</li>
+                <li>Use <code>/undo</code> to remove last exchange</li>
+            </ul>
+            
+            <h3 id="long-term-memory">Long-term Memory <a class="anchor-link" href="#long-term-memory">#</a></h3>
+            <p>Use Honcho for persistent memory across sessions:</p>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes memory setup      # Interactive configuration
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes memory status     # Check active provider
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes memory off        # Disable external provider
+            </div>
+            
+            <h4>Honcho Tools</h4>
+            <table>
+                <tr>
+                    <th>Tool</th>
+                    <th>Usage</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>honcho_profile</code></td>
+                    <td><code>honcho_profile</code></td>
+                    <td>Fast warmup, no LLM cost</td>
+                </tr>
+                <tr>
+                    <td><code>honcho_context</code></td>
+                    <td><code>honcho_context</code></td>
+                    <td>Full snapshot (no LLM)</td>
+                </tr>
+                <tr>
+                    <td><code>honcho_conclude</code></td>
+                    <td><code>honcho_conclude conclusion="..."</code></td>
+                    <td>Save to memory</td>
+                </tr>
+                <tr>
+                    <td><code>honcho_search</code></td>
+                    <td><code>honcho_search query="..."</code></td>
+                    <td>Fast search (no LLM)</td>
+                </tr>
+                <tr>
+                    <td><code>honcho_reasoning</code></td>
+                    <td><code>honcho_reasoning query="..."</code></td>
+                    <td>Synthesized answer (LLM)</td>
+                </tr>
+            </table>
+            
+            <h3 id="user-profile">User Profile <a class="anchor-link" href="#user-profile">#</a></h3>
+            <p>Enable user profile persistence in config:</p>
+            <pre><code>memory:
+  memory_enabled: true
+  user_profile_enabled: true</code></pre>
+            
+            <div class="tip">
+                <div class="tip-title">Best Practice</div>
+                <p>When user shares something important:</p>
+                <pre><code>honcho_conclude conclusion="Prefers code examples over prose explanations"</code></pre>
+            </div>
+        </section>
+        
+        <!-- Configuration -->
+        <section id="configuration">
+            <h2>8. Configuration <a class="anchor-link" href="#configuration">#</a></h2>
+            
+            <h3 id="config-yaml">config.yaml <a class="anchor-link" href="#config-yaml">#</a></h2>
+            <p>Main configuration file at <code>~/.hermes/config.yaml</code>:</p>
+            
+            <pre><code># Model configuration
+model:
+  provider: "openai"  # openai, anthropic, ollama, etc.
+  model: "gpt-4"
+  
+# Display settings
+display:
+  compact: false
+  personality: "default"  # default, pirate, kawaii, etc.
+  
+# Memory settings  
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  
+# Context compression
+compression:
+  enabled: true
+  threshold: 0.50
+  target_ratio: 0.20
+  protect_last_n: 20
+
+# MCP servers
+mcp_servers:
+  github:
+    command: "npx"
+    args: ["-y", "@modelcontextprotocol/server-github"]
+    env:
+      GITHUB_PERSONAL_ACCESS_TOKEN: "ghp_xxx"</code></pre>
+            
+            <h3 id="env-variables">Environment Variables <a class="anchor-link" href="#env-variables">#</a></h3>
+            <p>Store sensitive values in <code>~/.hermes/.env</code>:</p>
+            
+            <pre><code># API Keys
+OPENAI_API_KEY=sk-xxx
+ANTHROPIC_API_KEY=sk-ant-xxx
+
+# Messaging Platforms
+TELEGRAM_BOT_TOKEN=xxx
+DISCORD_BOT_TOKEN=xxx
+SLACK_BOT_TOKEN=xoxb-xxx
+
+# MCP Servers (only safe vars passed)
+GITHUB_PERSONAL_ACCESS_TOKEN=ghp_xxx</code></pre>
+            
+            <h3 id="model-setup">Model/Provider Setup <a class="anchor-link" href="#model-setup">#</a></h3>
+            <div class="command">
+                <span class="prompt">$</span>hermes model
+            </div>
+            
+            <div class="command">
+                <span class="prompt">$</span>hermes config edit
+            </div>
+        </section>
+        
+        <!-- Power User Tips -->
+        <section id="power-tips">
+            <h2>9. Power User Tips <a class="anchor-link" href="#power-tips">#</a></h2>
+            
+            <h3 id="context-optimization">Context Optimization <a class="anchor-link" href="#context-optimization">#</a></h3>
+            <p>Keep sessions efficient:</p>
+            
+            <div class="tip">
+                <div class="tip-title">Use /compress Before Limits</div>
+                <p>When responses slow down or get truncated:</p>
+                <pre><code>/compress focus on the current task</code></pre>
+                <p>This summarizes history while preserving key context.</p>
+            </div>
+            
+            <pre><code># Check token consumption
+/usage
+
+# View context visualization
+/context
+
+# See cost breakdown  
+/cost</code></pre>
+            
+            <h3 id="token-saving">Token Saving Strategies <a class="anchor-link" href="#token-saving">#</a></h3>
+            
+            <table>
+                <tr>
+                    <th>Strategy</th>
+                    <th>How</th>
+                </tr>
+                <tr>
+                    <td>Use /btw</td>
+                    <td>Quick questions without history</td>
+                </tr>
+                <tr>
+                    <td>Use /compress</td>
+                    <td>Summarize and reduce context</td>
+                </tr>
+                <tr>
+                    <td>Focus parameter</td>
+                    <td><code>/compress focus on auth</code></td>
+                </tr>
+                <tr>
+                    <td>Start fresh</td>
+                    <td><code>/new</code> for new topics</td>
+                </tr>
+                <tr>
+                    <td>Compact mode</td>
+                    <td><code>/compact</code> keeps CLAUDE.md</td>
+                </tr>
+            </table>
+            
+            <div class="warning">
+                <div class="warning-title">honcho_reasoning Cost</div>
+                <p>Using <code>honcho_reasoning</code> tool costs LLM tokens. Use sparingly - only when search isn't enough.</p>
+            </div>
+            
+            <h3 id="efficient-workflows">Efficient Workflows <a class="anchor-link" href="#efficient-workflows">#</a></h3>
+            
+            <h4>Best Practices</h4>
+            <ol>
+                <li><strong>Start with honcho_profile</strong> - Fast warmup, no LLM cost</li>
+                <li><strong>Use honcho_search</strong> - For specific facts, no LLM</li>
+                <li><strong>Use honcho_reasoning</strong> - Only when deep synthesis needed</li>
+                <li><strong>Don't re-fetch injected context</strong> - It auto-injects!</li>
+            </ol>
+            
+            <div class="tip">
+                <div class="tip-title">Recommended Startup Sequence</div>
+                <pre><code>1. honcho_profile           # Fast warmup
+2. If thin → honcho_context  # Full snapshot
+3. If deep → honcho_reasoning  # Use sparingly</code></pre>
+            </div>
+            
+            <h4>Branching Sessions</h4>
+            <pre><code>/branch experiment-with-llama-3</code></pre>
+            <p>Explore different paths while preserving the original.</p>
+            
+            <h4>Snapshots</h4>
+            <pre><code>/snapshot create before-refactor
+/snapshot restore 1
+/snapshot prune 5</code></pre>
+        </section>
+        
+        <!-- Troubleshooting -->
+        <section id="troubleshooting">
+            <h2>10. Troubleshooting <a class="anchor-link" href="#troubleshooting">#</a></h2>
+            
+            <h3 id="debug-reports">Debug Reports <a class="anchor-link" href="#debug-reports">#</a></h3>
+            <p>Generate debug reports for support:</p>
+            
+            <pre><code>/debug</code></pre>
+            
+            <p>CLI alternative:</p>
+            <div class="command">
+                <span class="prompt">$</span>hermes debug share              # Upload, print URL
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes debug share --lines 500  # More logs
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes debug share --local     # Print locally
+            </div>
+            
+            <h3 id="health-checks">Health Checks <a class="anchor-link" href="#health-checks">#</a></h3>
+            <div class="command">
+                <span class="prompt">$</span>hermes doctor
+            </div>
+            
+            <p>Check configuration:</p>
+            <div class="command">
+                <span class="prompt">$</span>hermes config edit
+            </div>
+            <div class="command">
+                <span class="prompt">$</span>hermes config env-path
+            </div>
+            
+            <div class="danger">
+                <div class="danger-title">Common Issues</div>
+                <ul>
+                    <li><strong>API key not working:</strong> Check ~/.hermes/.env</li>
+                    <li><strong>Slow responses:</strong> Use /compress</li>
+                    <li><strong>Platform not connecting:</strong> Check tokens in .env</li>
+                    <li><strong>Tools not appearing:</strong> Check MCP config and reload with /reload-mcp</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Quick Reference -->
+        <section id="quick-ref">
+            <h2>Quick Reference <a class="anchor-link" href="#quick-ref">#</a></h2>
+            
+            <h3 id="command-list">Complete Command List <a class="anchor-link" href="#command-list">#</a></h3>
+            
+            <h4>CLI Commands</h4>
+            <pre><code>hermes                 # Interactive chat
+hermes chat -q "query"  # Single query
+hermes setup            # Setup wizard
+hermes model            # Change model
+hermes doctor           # Health check
+hermes config edit      # Edit config
+hermes tools list     # List tools
+hermes skills browse   # Browse skills
+hermes skills install &lt;skill&gt;
+hermes cron create "&lt;schedule&gt;" "&lt;prompt&gt;"
+hermes cron list
+hermes gateway setup
+hermes gateway start/stop/status
+hermes memory setup/status/off
+hermes sessions browse
+hermes debug share</code></pre>
+            
+            <h4>Slash Commands Summary</h4>
+            <pre><code># Session
+/new, /reset, /clear, /history, /save, /retry, /undo
+/title, /resume, /branch, /stop, /exit
+
+# Context
+/compress [focus], /compact [focus], /context, /usage, /cost
+
+# Tools
+/help, /tools, /toolsets, /skills, /skill, /plugins
+/cron, /reload-mcp
+
+# Messaging
+/model, /personality, /btw, /status, /todos
+/background, /queue, /rewind, /rollback, /snapshot
+/debug, /profile, /plan</code></pre>
+            
+            <div class="tip">
+                <div class="tip-title">Type / for Autocomplete</div>
+                <p>In interactive chat, type <code>/</code> and press Tab to see available commands.</p>
+            </div>
+        </section>
+        
+        <footer style="margin-top: 60px; padding: 30px; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted);">
+            <p>Hermes Agent Complete Guide | Built with ❤️</p>
+            <p style="font-size: 14px;">Official Docs: <a href="https://github.com/nousresearch/hermes-agent" style="color: var(--accent);">github.com/nousresearch/hermes-agent</a></p>
+        </footer>
+    </div>
+</body>
+</html>
